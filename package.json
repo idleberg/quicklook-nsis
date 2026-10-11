@@ -1,12 +1,28 @@
 {
-	"name": "quicklook-kit-monorepo",
+	"name": "quicklook-nsis",
 	"private": true,
 	"type": "module",
 	"workspaces": [
-		"packages/*",
-		"templates/*"
+		"packages/*"
 	],
+	"scripts": {
+		"dev": "quicklook dev",
+		"build": "quicklook build",
+		"register": "quicklook build && quicklook register",
+		"unregister": "quicklook unregister",
+		"check": "svelte-kit sync && svelte-check"
+	},
 	"devDependencies": {
-		"@biomejs/biome": "2.5.14"
+		"@biomejs/biome": "2.5.14",
+		"@nsis/textmate": "^0.1.4",
+		"@sveltejs/adapter-static": "3.0.10",
+		"@sveltejs/kit": "2.70.3",
+		"@sveltejs/vite-plugin-svelte": "7.3.1",
+		"quicklook-kit": "workspace:*",
+		"shiki": "^4.5.0",
+		"svelte": "5.57.1",
+		"svelte-check": "4.7.6",
+		"typescript": "6.0.3",
+		"vite": "8.3.0"
 	}
 }

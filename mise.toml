@@ -15,40 +15,34 @@ postinstall = """
   bun install
 """
 
-# Project tasks run in the current directory: cd into a template first.
 [tasks.dev]
 description = "Start the dev server, drop a file on the page to preview it"
-dir = "{{cwd}}"
 run = "bun run quicklook dev"
 
 [tasks.'build:web']
 description = "Build the preview page only"
-dir = "{{cwd}}"
 run = "bun run quicklook build:web"
 
 [tasks.build]
 description = "Build the app with its QuickLook extension into .quicklook/build"
-dir = "{{cwd}}"
 run = "bun run quicklook build"
 
 [tasks.register]
 description = "Build the app, install it to /Applications and register the extension"
-dir = "{{cwd}}"
 depends = ["build"]
 run = "bun run quicklook register"
 
 [tasks.unregister]
 description = "Remove the app from /Applications"
-dir = "{{cwd}}"
 run = "bun run quicklook unregister"
 
 [tasks.check]
-description = "Typecheck the package, every template and the Swift sources"
+description = "Typecheck the preview, the package and the Swift sources"
 depends = ["check:*"]
 
 [tasks.'check:web']
-description = "Typecheck the package and every template"
-run = "bun run --filter '*' check"
+description = "Typecheck the preview and the package"
+run = ["bun run check", "bun run --filter '*' check"]
 
 [tasks.'check:swift']
 description = "Typecheck the Swift sources"
