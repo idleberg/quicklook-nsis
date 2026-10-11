@@ -7,7 +7,7 @@
 ## Requirements
 
 - macOS 14 or later, with [Xcode](https://apps.apple.com/app/xcode/id497799835) installed
-- [mise](https://mise.jdx.dev), which installs Bun and XcodeGen. Installing both yourself works too.
+- [mise](https://mise.jdx.dev), which installs Bun, XcodeGen and the Rust toolchain for [clark](https://crates.io/crates/clark-cli). Installing them yourself works too.
 
 ```sh
 mise install
@@ -62,6 +62,7 @@ mise run unregister     # remove the app
 mise run check          # typecheck the preview, the package and the Swift code
 mise run lint           # Biome and SwiftLint
 mise run format         # Biome and swift-format
+mise run init           # drop packages/ and use quicklook-kit from npm
 ```
 
 A pre-commit hook from [hk](https://hk.jdx.dev) runs the linters and formatters with fixes on staged files.

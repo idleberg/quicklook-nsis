@@ -2,9 +2,6 @@
 	"name": "quicklook-nsis",
 	"private": true,
 	"type": "module",
-	"workspaces": [
-		"packages/*"
-	],
 	"scripts": {
 		"dev": "quicklook dev",
 		"build": "quicklook build",
@@ -18,7 +15,7 @@
 		"@sveltejs/adapter-static": "3.0.10",
 		"@sveltejs/kit": "2.70.3",
 		"@sveltejs/vite-plugin-svelte": "7.3.1",
-		"quicklook-kit": "workspace:*",
+		"quicklook-kit": "^0.2.0",
 		"shiki": "^4.5.0",
 		"svelte": "5.57.1",
 		"svelte-check": "4.7.6",

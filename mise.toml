@@ -1,9 +1,11 @@
 [tools]
-bun = "latest"
-hk = "latest"
-pkl = "latest"
-swiftlint = "latest"
-xcodegen = "latest"
+bun = "1.3.13"
+"cargo:clark-cli" = "0.3.0"
+hk = "2.4.0"
+pkl = "0.32.1"
+rust = "1.96.0"
+swiftlint = "0.63.2"
+xcodegen = "2.46.0"
 
 [env]
 HK_MISE = 1
@@ -14,6 +16,38 @@ postinstall = """
   hk install --mise
   bun install
 """
+
+[tasks.init]
+description = "Drop the vendored quicklook-kit and use it from npm"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ ! -d packages ]; then
+  echo "Already initialised." >&2
+  exit 1
+fi
+
+clark intro "quicklook-kit"
+# clark confirm exits 1 for no; anything else non-zero means cancelled
+status=0
+clark confirm "Delete packages/ and use quicklook-kit from npm?" --initial-value false || status=$?
+if [ "$status" -ne 0 ]; then
+  clark cancel "Nothing changed."
+  [ "$status" -eq 1 ] && exit 0 || exit "$status"
+fi
+
+version=$(bun -p 'require("./packages/quicklook-kit/package.json").version')
+rm -rf packages
+bun pm pkg delete workspaces
+bun pm pkg set "devDependencies.quicklook-kit=^$version"
+
+# The lockfile still points at the workspace copy
+rm -f bun.lock
+clark spinner "Installing dependencies" -- bun install
+
+clark outro "Done. quicklook-kit $version now comes from npm."
+'''
 
 [tasks.dev]
 description = "Start the dev server, drop a file on the page to preview it"
@@ -42,23 +76,34 @@ depends = ["check:*"]
 
 [tasks.'check:web']
 description = "Typecheck the preview and the package"
-run = ["bun run check", "bun run --filter '*' check"]
+run = ["bun run check", "[ ! -d packages ] || bun run --filter '*' check"]
 
 [tasks.'check:swift']
 description = "Typecheck the Swift sources"
-run = [
-  "xcrun swiftc -typecheck -parse-as-library -swift-version 6 packages/quicklook-kit/native/App/*.swift",
-  "xcrun swiftc -typecheck -parse-as-library -swift-version 6 packages/quicklook-kit/native/Extension/*.swift",
-]
+run = '''
+[ -d packages ] || exit 0
+xcrun swiftc -typecheck -parse-as-library -swift-version 6 packages/quicklook-kit/native/App/*.swift
+xcrun swiftc -typecheck -parse-as-library -swift-version 6 packages/quicklook-kit/native/Extension/*.swift
+'''
 
 [tasks.lint]
 description = "Lint JS/TS/Svelte/Astro and Swift sources"
-run = ["bunx biome lint .", "swiftlint lint --quiet"]
+run = ["bunx biome lint .", "[ ! -d packages ] || swiftlint lint --quiet"]
 
 [tasks.format]
 description = "Format all sources in place"
-run = ["bunx biome check --write .", "swift format --recursive --in-place packages/quicklook-kit/native"]
+run = [
+  "bunx biome check --write .",
+  "[ ! -d packages ] || swift format --recursive --in-place packages/quicklook-kit/native",
+]
 
 [tasks.'format:check']
 description = "Fail if any source is unformatted"
-run = ["bunx biome format .", "swift format lint --strict --recursive packages/quicklook-kit/native"]
+run = [
+  "bunx biome format .",
+  "[ ! -d packages ] || swift format lint --strict --recursive packages/quicklook-kit/native",
+]
+
+[settings]
+# mise-action runs `install --locked` whenever mise.lock exists, which fails for aqua tools
+lockfile = false
