@@ -1,11 +1,11 @@
 import { defineConfig } from 'quicklook-kit';
 
 export default defineConfig({
-	name: 'NSIS Preview',
-	bundleId: 'com.idleberg.NSISPreview',
+	name: 'QuickLook NSIS',
+	bundleId: 'com.idleberg.QuickLookNSIS',
 	types: [
 		{
-			id: 'com.idleberg.NSISPreview.nsis',
+			id: 'com.idleberg.QuickLookNSIS.nsis',
 			description: 'NSIS Script',
 			extensions: ['nsi', 'nsh', 'nsdinc'],
 			conformsTo: ['public.source-code'],

@@ -42,7 +42,7 @@ This builds the app into `.quicklook/build`, copies it to `/Applications` and la
 
 Run it again after every change. `mise run unregister` removes the app.
 
-If the preview doesn't show up, check `pluginkit -mAv | grep com.idleberg.NSISPreview`, and make sure no other app claims the same file type.
+If the preview doesn't show up, check `pluginkit -mAv | grep com.idleberg.QuickLookNSIS`, and make sure no other app claims the same file type.
 
 ## Releasing
 
