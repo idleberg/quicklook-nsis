@@ -1,0 +1,27 @@
+{
+	"npm.packageManager": "bun",
+	"debug.javascript.defaultRuntimeExecutable": {
+		"pwa-node": "bun"
+	},
+
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	},
+
+	// Only takes effect with the Swift extension installed. It formats with
+	// swift-format, which reads .swift-format.
+	"[swift]": {
+		"editor.defaultFormatter": "swiftlang.swift-vscode",
+		"editor.tabSize": 2
+	},
+
+	"search.exclude": {
+		"**/.quicklook": true,
+		"**/.svelte-kit": true,
+		"**/.astro": true,
+		"**/.output": true
+	}
+}

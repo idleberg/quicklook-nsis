@@ -1,0 +1,37 @@
+amends "package://github.com/jdx/hk/releases/download/v2.5.0/hk@2.5.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.5.0/hk@2.5.0#/Builtins.pkl"
+
+local swiftGlob = "packages/quicklook-kit/native/**/*.swift"
+
+local linters = new Mapping<String, Step> {
+    // bunx runs the project's own Biome, whatever else is on PATH. It lints and
+    // formats JS, TS, JSON, CSS, and the markup in .svelte and .astro files.
+    ["biome"] = (Builtins.biome) {
+        check = "bunx biome check --no-errors-on-unmatched --files-ignore-unknown=true {{ files }}"
+        fix = "bunx biome check --write --no-errors-on-unmatched --files-ignore-unknown=true {{ files }}"
+    }
+    ["swiftlint"] = (Builtins.swiftlint) {
+        glob = swiftGlob
+    }
+    // swift-format ships with the Xcode toolchain — no extra tool to install.
+    ["swift-format"] {
+        glob = swiftGlob
+        check = "swift format lint --strict {{ files }}"
+        fix = "swift format --in-place {{ files }}"
+    }
+}
+
+hooks {
+    ["pre-commit"] {
+        fix = true
+        stash = "git"
+        steps = linters
+    }
+    ["fix"] {
+        fix = true
+        steps = linters
+    }
+    ["check"] {
+        steps = linters
+    }
+}

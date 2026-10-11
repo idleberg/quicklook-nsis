@@ -1,0 +1,9 @@
+{
+	"recommendations": [
+		"biomejs.biome",
+		"svelte.svelte-vscode",
+		"astro-build.astro-vscode",
+		"Vue.volar",
+		"Angular.ng-template"
+	]
+}
