@@ -61,6 +61,7 @@ mise run unregister     # remove the app
 mise run check          # typecheck the preview, the package and the Swift code
 mise run lint           # Biome and SwiftLint
 mise run format         # Biome and swift-format
+mise run init           # drop packages/ and use quicklook-kit from npm
 ```
 
 A pre-commit hook from [hk](https://hk.jdx.dev) runs the linters and formatters with fixes on staged files.

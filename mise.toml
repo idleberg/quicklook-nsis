@@ -24,6 +24,39 @@ postinstall = """
   pnpm install --frozen-lockfile
 """
 
+[tasks.init]
+description = "Drop the vendored quicklook-kit and use it from npm"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [ ! -d packages ]; then
+  echo "Already initialised." >&2
+  exit 1
+fi
+
+clark intro "quicklook-kit"
+# clark confirm exits 1 for no; anything else non-zero means cancelled
+status=0
+clark confirm "Delete packages/ and use quicklook-kit from npm?" --initial-value false || status=$?
+if [ "$status" -ne 0 ]; then
+  clark cancel "Nothing changed."
+  [ "$status" -eq 1 ] && exit 0 || exit "$status"
+fi
+
+version=$(node -p 'require("./packages/quicklook-kit/package.json").version')
+rm -rf packages
+sed -i.bak -e '/^packages:/d' -e '/^  - packages\//d' -e '/^linkWorkspacePackages:/d' pnpm-workspace.yaml
+rm -f pnpm-workspace.yaml.bak
+npm pkg set "devDependencies.quicklook-kit=^$version"
+
+# The lockfile still points at the workspace copy
+rm -f pnpm-lock.yaml
+clark spinner "Installing dependencies" -- pnpm install
+
+clark outro "Done. quicklook-kit $version now comes from npm."
+'''
+
 [tasks.dev]
 description = "Start the dev server, drop a file on the page to preview it"
 run = "pnpm exec quicklook dev"
