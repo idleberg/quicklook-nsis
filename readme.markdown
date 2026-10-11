@@ -7,7 +7,7 @@
 ## Requirements
 
 - macOS 14 or later, with [Xcode](https://apps.apple.com/app/xcode/id497799835) installed
-- [mise](https://mise.jdx.dev), which installs Bun, XcodeGen and the Rust toolchain for [clark](https://crates.io/crates/clark-cli). Installing them yourself works too.
+- [mise](https://mise.jdx.dev), which installs Node.js (with pnpm through corepack), XcodeGen and the Rust toolchain for [clark](https://crates.io/crates/clark-cli). Installing them yourself works too.
 
 ```sh
 mise install
@@ -19,7 +19,6 @@ mise install
 | --------------------------- | ------------------------------------------------------------------------ |
 | `quicklook.config.ts`       | App name, bundle id, the NSIS file types and the Shiki themes            |
 | `src/lib/FileViewer.svelte` | The preview                                                              |
-| `packages/quicklook-kit`    | The `quicklook` CLI, config, Vite plugin and Swift code, vendored from [QuickLook Kit](https://github.com/idleberg/quicklook-kit) |
 
 ## Develop
 
@@ -62,7 +61,6 @@ mise run unregister     # remove the app
 mise run check          # typecheck the preview, the package and the Swift code
 mise run lint           # Biome and SwiftLint
 mise run format         # Biome and swift-format
-mise run init           # drop packages/ and use quicklook-kit from npm
 ```
 
 A pre-commit hook from [hk](https://hk.jdx.dev) runs the linters and formatters with fixes on staged files.
