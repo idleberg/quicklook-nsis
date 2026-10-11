@@ -11,6 +11,7 @@ export default defineConfig({
 			conformsTo: ['public.source-code'],
 		},
 	],
+	icon: 'assets/AppIcon.icns',
 	framework: 'sveltekit',
 	public: {
 		// Any theme in shiki/themes, e.g. 'nord' or 'one-dark-pro'.
