@@ -10,8 +10,6 @@ xcodegen = "2.46.0"
 [settings]
 # Node ships pnpm through corepack, pinned by packageManager in package.json
 node.corepack = true
-# mise-action runs `install --locked` whenever mise.lock exists, which fails for aqua tools
-lockfile = false
 
 [env]
 HK_MISE = 1
