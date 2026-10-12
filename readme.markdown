@@ -2,7 +2,7 @@
 
 [![Build](https://img.shields.io/github/actions/workflow/status/idleberg/quicklook-nsis/ci.yml?style=for-the-badge)](https://github.com/idleberg/quicklook-nsis/actions)
 
-> QuickLook preview for NSIS scripts (.nsi, .nsh), highlighted with @nsis/textmate and Shiki.
+> Quick Look preview for NSIS scripts (.nsi, .nsh), highlighted with @nsis/textmate and Shiki.
 
 ## Requirements
 
@@ -28,11 +28,11 @@ mise run dev
 
 This starts the dev server. Drop a `.nsi` file (e.g. `fixtures/bigtest.nsi`) on the page to see it rendered.
 
-**Preview the dev server in Safari.** It uses the same WebKit engine as QuickLook's WKWebView, so it's the closest match to what the extension renders.
+**Preview the dev server in Safari.** It uses the same WebKit engine as Quick Look's WKWebView, so it's the closest match to what the extension renders.
 
 The page can't load anything from the network. The dev server only reports CSP violations in the console, without blocking them, so check it there.
 
-## Try it in QuickLook
+## Try it in Quick Look
 
 ```sh
 mise run register
@@ -72,4 +72,4 @@ This work is licensed under [The MIT License](LICENSE).
 
 ---
 
-Made with [QuickLook Kit](https://github.com/idleberg/quicklook-kit).
+Made with [Quick Look Kit](https://github.com/idleberg/quicklook-kit).

@@ -1,7 +1,7 @@
 import { defineConfig } from 'quicklook-kit';
 
 export default defineConfig({
-	name: 'QuickLook NSIS',
+	name: 'Quick Look NSIS',
 	bundleId: 'com.idleberg.QuickLookNSIS',
 	types: [
 		{
