@@ -4,5 +4,6 @@ allowBuilds:
   esbuild: false
   lmdb: false
   msgpackr-extract: false
+
 minimumReleaseAgeExclude:
-  - quicklook-kit@0.3.0
+  - quicklook-kit
