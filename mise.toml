@@ -88,8 +88,8 @@ run = ["pnpm check", "[ ! -d packages ] || pnpm --filter './packages/*' check"]
 description = "Typecheck the Swift sources"
 run = '''
 [ -d packages ] || exit 0
-xcrun swiftc -typecheck -parse-as-library -swift-version 6 packages/quicklook-kit/native/App/*.swift
-xcrun swiftc -typecheck -parse-as-library -swift-version 6 packages/quicklook-kit/native/Extension/*.swift
+xcrun swiftc -typecheck -parse-as-library -swift-version 6 packages/quicklook-kit/native/App/*.swift packages/quicklook-kit/native/Shared/*.swift
+xcrun swiftc -typecheck -parse-as-library -swift-version 6 packages/quicklook-kit/native/Extension/*.swift packages/quicklook-kit/native/Shared/*.swift
 '''
 
 [tasks.lint]

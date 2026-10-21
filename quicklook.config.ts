@@ -1,5 +1,23 @@
 import { defineConfig } from 'quicklook-kit';
 
+const theme = (light: boolean) => ({
+	type: 'string' as const,
+	default: 'catppuccin',
+	enum: [
+		{ value: 'atom-one', description: light ? 'One Light' : 'One Dark Pro' },
+		{ value: 'ayu', description: light ? 'Ayu Light' : 'Ayu Dark' },
+		{ value: 'catppuccin', description: light ? 'Catppuccin Latte' : 'Catppuccin Mocha' },
+		{ value: 'everforest', description: light ? 'Everforest Light' : 'Everforest Dark' },
+		{ value: 'github', description: light ? 'GitHub Light' : 'GitHub Dark' },
+		{ value: 'gruvbox', description: light ? 'Gruvbox Light' : 'Gruvbox Dark' },
+		{ value: 'horizon', description: light ? 'Horizon Bright' : 'Horizon' },
+		{ value: 'material', description: light ? 'Material Lighter' : 'Material' },
+		{ value: 'night-owl', description: light ? 'Night Owl Light' : 'Night Owl' },
+		{ value: 'rose-pine', description: light ? 'Rosé Pine Dawn' : 'Rosé Pine' },
+		{ value: 'solarized', description: light ? 'Solarized Light' : 'Solarized Dark' },
+	],
+});
+
 export default defineConfig({
 	name: 'Quick Look NSIS',
 	bundleId: 'com.idleberg.QuickLookNSIS',
@@ -13,11 +31,8 @@ export default defineConfig({
 	],
 	icon: 'assets/AppIcon.icns',
 	framework: 'sveltekit',
-	public: {
-		// Any theme in shiki/themes, e.g. 'nord' or 'one-dark-pro'.
-		theme: {
-			light: 'catppuccin-latte',
-			dark: 'catppuccin-macchiato',
-		},
+	settings: {
+		lightTheme: theme(true),
+		darkTheme: theme(false),
 	},
 });

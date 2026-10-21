@@ -17,8 +17,14 @@ mise install
 
 | Path                        |                                                                          |
 | --------------------------- | ------------------------------------------------------------------------ |
-| `quicklook.config.ts`       | App name, bundle id, the NSIS file types and the Shiki themes            |
+| `quicklook.config.ts`       | App name, bundle id, the NSIS file types and the theme settings         |
 | `src/lib/FileViewer.svelte` | The preview                                                              |
+
+## Themes
+
+Pick a light and a dark theme in the app's Settings tab. The preview follows the system appearance and defaults to Catppuccin. Changes apply to the next preview.
+
+Available themes: **Atom One**, **Ayu**, **Catppuccin**, **Everforest**, **GitHub**, **Gruvbox**, **Horizon**, **Material**, **Night Owl**, **Rosé Pine** and **Solarized**.
 
 ## Develop
 

@@ -20,7 +20,9 @@
 			},
 			"correctness": {
 				"noUnresolvedImports": "off",
-				"useImportExtensions": "off"
+				"useImportExtensions": "off",
+				// No Qwik here; the preset flags plain closures.
+				"useQwikValidLexicalScope": "off"
 			},
 			"complexity": {
 				"noExcessiveLinesPerFunction": "off"

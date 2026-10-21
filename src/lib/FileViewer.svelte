@@ -4,12 +4,13 @@
 	page's CSP would block.
 -->
 <script lang="ts" module>
-	import dark from 'virtual:shiki-theme-dark';
-	import light from 'virtual:shiki-theme-light';
 	import grammar from '@nsis/textmate';
 	import type { LanguageRegistration } from 'shiki';
 	import { createHighlighterCoreSync } from 'shiki/core';
 	import { createJavaScriptRegexEngine } from 'shiki/engine/javascript';
+	import { themePair } from './themes.ts';
+
+	const [light, dark] = themePair();
 
 	const highlighter = createHighlighterCoreSync({
 		engine: createJavaScriptRegexEngine(),
