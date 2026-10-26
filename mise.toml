@@ -1,11 +1,12 @@
 [tools]
 node = "24"
 "cargo:clark-cli" = "0.3.0"
+dotnet = "10"
 hk = "2.4.0"
 pkl = "0.32.1"
 rust = "1.96.0"
-swiftlint = "0.63.2"
-xcodegen = "2.46.0"
+swiftlint = { version = "0.63.2", os = ["macos"] }
+xcodegen = { version = "2.46.0", os = ["macos"] }
 
 [settings]
 # Node ships pnpm through corepack, pinned by packageManager in package.json
@@ -64,16 +65,16 @@ description = "Build the preview page only"
 run = "pnpm exec quicklook build:web"
 
 [tasks.build]
-description = "Build the app with its Quick Look extension into .quicklook/build"
+description = "Build the macOS app and the Windows plugin into .quicklook/build"
 run = "pnpm exec quicklook build"
 
 [tasks.register]
-description = "Build the app, install it to /Applications and register the extension"
+description = "Build, then install the app to /Applications (macOS) or the plugin into QuickLook (Windows)"
 depends = ["build"]
 run = "pnpm exec quicklook register"
 
 [tasks.unregister]
-description = "Remove the app from /Applications"
+description = "Remove the installed app or plugin"
 run = "pnpm exec quicklook unregister"
 
 [tasks.check]

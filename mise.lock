@@ -7,6 +7,11 @@ version = "0.3.0"
 backend = "cargo:clark-cli"
 specifiers = ["0.3.0"]
 
+[[tools.dotnet]]
+version = "10.0.402"
+backend = "core:dotnet"
+specifiers = ["10"]
+
 [[tools.hk]]
 version = "2.4.0"
 backend = "packslip:github.com/jdx/hk"

@@ -1,46 +1,39 @@
-import { settings } from 'virtual:quicklook';
-import type { ThemeRegistration } from 'shiki';
-import ayuDark from 'shiki/themes/ayu-dark.mjs';
-import ayuLight from 'shiki/themes/ayu-light.mjs';
-import catppuccinLatte from 'shiki/themes/catppuccin-latte.mjs';
-import catppuccinMocha from 'shiki/themes/catppuccin-mocha.mjs';
-import everforestDark from 'shiki/themes/everforest-dark.mjs';
-import everforestLight from 'shiki/themes/everforest-light.mjs';
-import githubDark from 'shiki/themes/github-dark.mjs';
-import githubLight from 'shiki/themes/github-light.mjs';
-import gruvboxDark from 'shiki/themes/gruvbox-dark-medium.mjs';
-import gruvboxLight from 'shiki/themes/gruvbox-light-medium.mjs';
-import horizon from 'shiki/themes/horizon.mjs';
-import horizonBright from 'shiki/themes/horizon-bright.mjs';
-import materialTheme from 'shiki/themes/material-theme.mjs';
-import materialLighter from 'shiki/themes/material-theme-lighter.mjs';
-import nightOwl from 'shiki/themes/night-owl.mjs';
-import nightOwlLight from 'shiki/themes/night-owl-light.mjs';
-import oneDarkPro from 'shiki/themes/one-dark-pro.mjs';
-import oneLight from 'shiki/themes/one-light.mjs';
-import rosePine from 'shiki/themes/rose-pine.mjs';
-import rosePineDawn from 'shiki/themes/rose-pine-dawn.mjs';
-import solarizedDark from 'shiki/themes/solarized-dark.mjs';
-import solarizedLight from 'shiki/themes/solarized-light.mjs';
+// Each twinkleplop theme is only `--twp-*` properties on :root, so the chosen
+// pair can go into one <style>, with the dark one behind a media query.
 
-const themes: Record<string, [light: ThemeRegistration, dark: ThemeRegistration]> = {
-	'atom-one': [oneLight, oneDarkPro],
+import { settings } from 'virtual:quicklook';
+import atomOneDark from '@twinkleplop/theme-atom-one/dark?inline';
+import atomOneLight from '@twinkleplop/theme-atom-one/light?inline';
+import ayuDark from '@twinkleplop/theme-ayu/dark?inline';
+import ayuLight from '@twinkleplop/theme-ayu/light?inline';
+import catppuccinDark from '@twinkleplop/theme-catppuccin/dark?inline';
+import catppuccinLight from '@twinkleplop/theme-catppuccin/light?inline';
+import githubDark from '@twinkleplop/theme-github/dark?inline';
+import githubLight from '@twinkleplop/theme-github/light?inline';
+import materialDark from '@twinkleplop/theme-material/dark?inline';
+import materialLight from '@twinkleplop/theme-material/light?inline';
+import nightOwlDark from '@twinkleplop/theme-night-owl/dark?inline';
+import nightOwlLight from '@twinkleplop/theme-night-owl/light?inline';
+import rosePineDark from '@twinkleplop/theme-rose-pine/dark?inline';
+import rosePineLight from '@twinkleplop/theme-rose-pine/light?inline';
+import solarizedDark from '@twinkleplop/theme-solarized/dark?inline';
+import solarizedLight from '@twinkleplop/theme-solarized/light?inline';
+
+const themes: Record<string, [light: string, dark: string]> = {
+	'atom-one': [atomOneLight, atomOneDark],
 	ayu: [ayuLight, ayuDark],
-	catppuccin: [catppuccinLatte, catppuccinMocha],
-	everforest: [everforestLight, everforestDark],
+	catppuccin: [catppuccinLight, catppuccinDark],
 	github: [githubLight, githubDark],
-	gruvbox: [gruvboxLight, gruvboxDark],
-	horizon: [horizonBright, horizon],
-	material: [materialLighter, materialTheme],
-	'night-owl': [nightOwlLight, nightOwl],
-	'rose-pine': [rosePineDawn, rosePine],
+	material: [materialLight, materialDark],
+	'night-owl': [nightOwlLight, nightOwlDark],
+	'rose-pine': [rosePineLight, rosePineDark],
 	solarized: [solarizedLight, solarizedDark],
 };
 
-/** The user's light and dark Shiki themes; Catppuccin if unknown. */
-export function themePair(): [light: ThemeRegistration, dark: ThemeRegistration] {
+/** The user's light and dark themes as one stylesheet; Catppuccin if unknown. */
+export function themeCss() {
 	const { lightTheme, darkTheme } = settings() as { lightTheme: string; darkTheme: string };
 	const [light] = themes[lightTheme] ?? themes.catppuccin;
 	const [, dark] = themes[darkTheme] ?? themes.catppuccin;
-	return [light, dark];
+	return `${light}\n@media (prefers-color-scheme: dark) {\n${dark}\n}`;
 }

@@ -16,26 +16,23 @@ jobs:
 
       - uses: jdx/mise-action@v2
 
-      # Release builds are universal (arm64 + x86_64) by default.
+      # Builds the macOS app, universal (arm64 + x86_64) by default, and the Windows plugin.
       - run: mise run build
         env:
           VERSION: ${{ github.ref_name }}
 
-      - name: Package app
-        id: package
+      # Quick-Look-NSIS-<tag>-macos.zip and Quick-Look-NSIS-<tag>-windows.qlplugin
+      - name: Package
         run: |
+          mkdir release
           cd .quicklook/build
-          app=$(ls -d *.app)
-          zip="${app%.app}"
-          zip="${zip// /-}-${GITHUB_REF_NAME}.zip"
-          zip -r -9 -y "$GITHUB_WORKSPACE/$zip" "$app"
-          cd "$GITHUB_WORKSPACE"
-          shasum -a 256 "$zip" > SHA256SUMS
-          echo "zip=$zip" >> "$GITHUB_OUTPUT"
+          app=$(basename macos/*.app .app)
+          (cd macos && zip -r -9 -y "$GITHUB_WORKSPACE/release/${app// /-}-$GITHUB_REF_NAME-macos.zip" "$app.app")
+          cp windows/*.qlplugin "$GITHUB_WORKSPACE/release/${app// /-}-$GITHUB_REF_NAME-windows.qlplugin"
+          cd "$GITHUB_WORKSPACE/release"
+          shasum -a 256 * > SHA256SUMS
 
       - uses: softprops/action-gh-release@v2
         with:
-          files: |
-            ${{ steps.package.outputs.zip }}
-            SHA256SUMS
+          files: release/*
           generate_release_notes: true
