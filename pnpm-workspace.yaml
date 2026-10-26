@@ -1,10 +1,10 @@
 # All of these ship prebuilt binaries, their install scripts aren't needed.
 allowBuilds:
-  '@parcel/watcher': false
+  "@parcel/watcher": false
   esbuild: false
   lmdb: false
   msgpackr-extract: false
 
 minimumReleaseAgeExclude:
   - quicklook-kit
-  - '@nsis/twinkleplop@0.1.0'
+  - "@nsis/twinkleplop@0.1.0"
