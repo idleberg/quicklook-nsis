@@ -21,7 +21,9 @@ Download the latest `*-windows.qlplugin` from the [releases](https://github.com/
 
 The preview follows the system appearance and defaults to Catppuccin.
 
-On macOS, pick a light and a dark theme, and whether to show line numbers, in the app's Settings tab; changes apply to the next preview. On Windows, set them in `%APPDATA%\pooi.moe\QuickLook\QuickLook.Plugin.NSIS.config`:
+On macOS, pick a light and a dark theme, and whether to show line numbers, in the app's Settings tab; changes apply to the next preview.
+
+On Windows, set them in `%APPDATA%\pooi.moe\QuickLook\QuickLook.Plugin.NSIS.config`:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
