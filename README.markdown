@@ -4,6 +4,9 @@
 
 Built with [quicklook-kit](https://www.npmjs.com/package/quicklook-kit) and SvelteKit.
 
+> [!TIP]
+> For a full-featured Quick Look plugin for developers, check out [`quicklook-coder`](https://github.com/idleberg/quicklook-coder) instead.
+
 ## Installation
 
 ### macOS
