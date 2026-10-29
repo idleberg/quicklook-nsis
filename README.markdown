@@ -1,11 +1,11 @@
+> [!IMPORTANT]
+> **This repository has been archived.** NSIS highlighting now ships with the [quicklook-coder](https://github.com/idleberg/quicklook-coder) plugin.
+
 # quicklook-nsis
 
 > A Quick Look plugin for macOS and [QuickLook](https://github.com/QL-Win/QuickLook) on Windows that highlights NSIS scripts with [twinkleplop](https://twinkleplop.pngwn.at)
 
 Built with [quicklook-kit](https://www.npmjs.com/package/quicklook-kit) and SvelteKit.
-
-> [!TIP]
-> For a full-featured Quick Look plugin for developers, check out [`quicklook-coder`](https://github.com/idleberg/quicklook-coder) instead.
 
 ## Installation
 
@@ -13,7 +13,7 @@ Built with [quicklook-kit](https://www.npmjs.com/package/quicklook-kit) and Svel
 
 Download the latest `*-macos.zip` from the [releases](https://github.com/idleberg/quicklook-nsis/releases) and move `Quick Look NSIS.app` to `/Applications`.
 
-> [!IMPORTANT]
+> [!NOTE]
 > To register the plugin, you need to launch `Quick Look NSIS.app` once after installation. The app is signed ad hoc, so you have to allow it in System Settings → Privacy & Security on first launch.
 
 ### Windows
